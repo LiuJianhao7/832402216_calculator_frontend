@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="832402216 刘鉴浩 前后端分离计算器">
+  <meta name="description" content="832402216 Liu Jianhao Calculator for Front-end and Back-end Decoupling">
   <title>JH Calculator | 832402216</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -13,7 +13,7 @@
       <div>
         <p class="eyebrow">Software Engineering · Assignment 1</p>
         <h1 id="page-title">JH Calculator</h1>
-        <p class="hero-copy">前端只负责交互与展示，所有表达式计算与历史持久化均由后端完成。</p>
+        <p class="hero-copy">The frontend is responsible only for interaction and presentation, while all expression calculations and history persistence are handled by the backend.</p>
       </div>
       <div class="identity-card">
         <span>刘鉴浩 · Liu Jianhao</span>
@@ -22,13 +22,13 @@
     </section>
 
     <section class="workspace">
-      <article class="calculator-card" aria-label="计算器">
+      <article class="calculator-card" aria-label="calculator">
         <div class="toolbar">
           <div class="connection-status" id="connectionStatus" aria-live="polite">
             <span class="status-dot"></span>
-            <span>正在检测后端…</span>
+            <span>Checking backend...</span>
           </div>
-          <button class="icon-button" id="themeButton" type="button" title="切换主题" aria-label="切换主题">◐</button>
+          <button class="icon-button" id="themeButton" type="button" title="Switch theme" aria-label="Switch theme">◐</button>
         </div>
 
         <div class="display-panel">
@@ -40,14 +40,14 @@
             inputmode="decimal"
             autocomplete="off"
             spellcheck="false"
-            placeholder="例如：(1+2)*3"
+            placeholder="eg:(1+2)*3"
             aria-describedby="keyboardHint"
           >
           <div class="result-row">
             <span class="result-label">Result</span>
             <output id="resultOutput" class="result-output" aria-live="polite">0</output>
           </div>
-          <p id="keyboardHint" class="keyboard-hint">支持键盘输入，Enter 计算，Esc 清空</p>
+          <p id="keyboardHint" class="keyboard-hint">Supports keyboard input: Enter to calculate, Esc to clear.</p>
           <p id="messageArea" class="message-area" aria-live="assertive"></p>
         </div>
 
@@ -58,7 +58,7 @@
           <button type="button" data-value=")">)</button>
         </div>
 
-        <div class="keypad" aria-label="计算器按键">
+        <div class="keypad" aria-label="Calculator keys">
           <button type="button" data-value="7">7</button>
           <button type="button" data-value="8">8</button>
           <button type="button" data-value="9">9</button>
@@ -81,8 +81,8 @@
         </div>
 
         <div class="footer-actions">
-          <button type="button" id="copyResultButton">复制结果</button>
-          <button type="button" id="reuseLastButton">回填最近表达式</button>
+          <button type="button" id="copyResultButton">Copy results</button>
+          <button type="button" id="reuseLastButton">Backfill the most recent expression</button>
         </div>
       </article>
 
@@ -90,24 +90,24 @@
         <div class="history-heading">
           <div>
             <p class="eyebrow">Persistent history</p>
-            <h2 id="history-title">计算历史</h2>
+            <h2 id="history-title">Calculation History</h2>
           </div>
-          <span class="history-count" id="historyCount">0 条</span>
+          <span class="history-count" id="historyCount">0 items</span>
         </div>
 
         <div class="history-tools">
-          <input id="historySearch" type="search" placeholder="搜索表达式或结果" aria-label="搜索历史">
-          <button id="refreshHistoryButton" type="button">刷新</button>
-          <button id="clearHistoryButton" class="danger-text" type="button">清空</button>
+          <input id="historySearch" type="search" placeholder="Search expression or results" aria-label="Search history">
+          <button id="refreshHistoryButton" type="button">Refresh</button>
+          <button id="clearHistoryButton" class="danger-text" type="button">Clear</button>
         </div>
 
         <div id="historyList" class="history-list" aria-live="polite">
-          <div class="empty-state">暂无历史记录</div>
+          <div class="empty-state">No history available</div>
         </div>
 
         <div class="history-note">
-          <strong>说明</strong>
-          <span>历史记录来自后端 SQLite 数据库，刷新页面不会丢失。</span>
+          <strong>illustrate</strong>
+          <span>The history records come from the backend SQLite database and will not be lost upon refreshing the page</span>
         </div>
       </aside>
     </section>

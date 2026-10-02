@@ -52,8 +52,8 @@ function setConnectionState(isOnline) {
   connectionStatus.classList.toggle('is-online', isOnline);
   connectionStatus.classList.toggle('is-offline', !isOnline);
   connectionStatus.querySelector('span:last-child').textContent = isOnline
-    ? '后端已连接'
-    : '后端未连接';
+    ? 'Backend connected'
+    : 'Backend not connected';
 }
 
 async function apiRequest(path, options = {}) {
@@ -94,13 +94,13 @@ async function calculate() {
 
   const expression = expressionInput.value.trim();
   if (!expression) {
-    showMessage('请输入要计算的表达式。', 'error');
+    showMessage('Please enter the expression to be calculated', 'error');
     expressionInput.focus();
     return;
   }
 
   calculationInProgress = true;
-  showMessage('正在由后端计算…', 'info');
+  showMessage('Calculating on the backend...', 'info');
 
   try {
     const data = await apiRequest('/api/calculate', {
@@ -109,18 +109,18 @@ async function calculate() {
     });
     resultOutput.textContent = data.result;
     expressionInput.value = data.expression;
-    showMessage('计算成功，记录已写入数据库。', 'success');
+    showMessage('Calculation successful; record written to the database', 'success');
     setConnectionState(true);
     await loadHistory();
   } catch (error) {
     resultOutput.textContent = '—';
     if (error instanceof TypeError) {
-      showMessage('无法连接后端，前端不会自行计算结果。', 'error');
+      showMessage('If the backend cannot be connected, the frontend will not calculate the results on its own', 'error');
       setConnectionState(false);
     } else if (error.code === 'DIVISION_BY_ZERO') {
-      showMessage('错误：除数不能为 0。', 'error');
+      showMessage('Error: The divisor cannot be 0', 'error');
     } else {
-      showMessage(`错误：${error.message}`, 'error');
+      showMessage(`error:${error.message}`, 'error');
     }
   } finally {
     calculationInProgress = false;
@@ -149,12 +149,12 @@ function createHistoryItem(item) {
   const main = document.createElement('button');
   main.type = 'button';
   main.className = 'history-main';
-  main.title = '点击回填此表达式';
+  main.title = 'Click to fill in this expression';
   main.addEventListener('click', () => {
     expressionInput.value = item.expression;
     resultOutput.textContent = item.result;
     expressionInput.focus();
-    showMessage('已回填历史表达式，可再次计算。', 'info');
+    showMessage('The historical expression has been restored; calculation can be performed again', 'info');
   });
 
   const expression = document.createElement('span');
@@ -174,8 +174,8 @@ function createHistoryItem(item) {
   const removeButton = document.createElement('button');
   removeButton.type = 'button';
   removeButton.className = 'delete-history';
-  removeButton.textContent = '删除';
-  removeButton.setAttribute('aria-label', `删除历史记录 ${item.expression}`);
+  removeButton.textContent = 'delete';
+  removeButton.setAttribute('aria-label', `Delete history ${item.expression}`);
   removeButton.addEventListener('click', async () => {
     await deleteHistory(item.id);
   });
@@ -186,14 +186,14 @@ function createHistoryItem(item) {
 
 function renderHistory(items) {
   historyList.replaceChildren();
-  historyCount.textContent = `${items.length} 条`;
+  historyCount.textContent = `${items.length} item`;
 
   if (items.length === 0) {
     const emptyState = document.createElement('div');
     emptyState.className = 'empty-state';
     emptyState.textContent = historySearch.value.trim()
-      ? '没有匹配的历史记录'
-      : '暂无历史记录';
+      ? 'No matching history records'
+      : 'No history available';
     historyList.append(emptyState);
     return;
   }
@@ -221,48 +221,48 @@ async function loadHistory() {
 async function deleteHistory(id) {
   try {
     await apiRequest(`/api/history/${id}`, { method: 'DELETE' });
-    showMessage('指定历史记录已从数据库删除。', 'success');
+    showMessage('The specified history record has been deleted from the database', 'success');
     await loadHistory();
   } catch (error) {
-    showMessage(`删除失败：${error.message}`, 'error');
+    showMessage(`Deletion failed:${error.message}`, 'error');
   }
 }
 
 async function clearAllHistory() {
   if (latestHistory.length === 0) {
-    showMessage('当前没有可清空的历史记录。', 'info');
+    showMessage('There is no history to clear at the moment', 'info');
     return;
   }
 
-  const confirmed = window.confirm('确定要删除数据库中的全部计算历史吗？');
+  const confirmed = window.confirm('Are you sure you want to delete all calculation history from the database?');
   if (!confirmed) {
     return;
   }
 
   try {
     await apiRequest('/api/history', { method: 'DELETE' });
-    showMessage('全部历史记录已清空。', 'success');
+    showMessage('All history has been cleared', 'success');
     await loadHistory();
   } catch (error) {
-    showMessage(`清空失败：${error.message}`, 'error');
+    showMessage(`Failed to clear:${error.message}`, 'error');
   }
 }
 
 function copyResult() {
   navigator.clipboard.writeText(resultOutput.textContent)
-    .then(() => showMessage('结果已复制到剪贴板。', 'success'))
-    .catch(() => showMessage('浏览器未允许剪贴板操作。', 'error'));
+    .then(() => showMessage('The result has been copied to the clipboard', 'success'))
+    .catch(() => showMessage('The browser has not granted permission for clipboard operations', 'error'));
 }
 
 function reuseLatestExpression() {
   if (latestHistory.length === 0) {
-    showMessage('当前没有可回填的历史表达式。', 'info');
+    showMessage('There are currently no historical expressions available for backfilling', 'info');
     return;
   }
   expressionInput.value = latestHistory[0].expression;
   resultOutput.textContent = latestHistory[0].result;
   expressionInput.focus();
-  showMessage('已回填最近一次成功计算。', 'info');
+  showMessage('The result of the most recent successful calculation has been backfilled', 'info');
 }
 
 function applyTheme(theme) {
@@ -285,7 +285,7 @@ function handleInputSanitization() {
   if (normalized !== expressionInput.value) {
     expressionInput.value = normalized;
     expressionInput.setSelectionRange(Math.min(cursor, normalized.length), Math.min(cursor, normalized.length));
-    showMessage('已移除不支持的字符。', 'info');
+    showMessage('Unsupported characters have been removed', 'info');
   }
 }
 

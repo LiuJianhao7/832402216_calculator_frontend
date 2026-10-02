@@ -1,32 +1,32 @@
 # 832402216 Calculator Frontend
 
-前端项目：软件工程实践第一次作业——前后端分离计算器。
+Frontend project: Software Engineering Practice First Assignment — Frontend-Backend Separated Calculator.
 
-- 学生：刘鉴浩（Liu Jianhao）
-- 学号：832402216
-- 技术栈：HTML5 / CSS3 / Vanilla JavaScript / Fetch API
-- 部署建议：GitHub Pages
+-Student: Liu Jianhao
+-Student ID: 832402216
+-Tech Stack: HTML5 / CSS3 / Vanilla JavaScript / Fetch API
+-Deployment Suggestion: GitHub Pages
 
-## 核心说明
+## Core Notes
 
-前端**不会计算最终数学结果**。点击 `=` 或按 Enter 后，只把表达式发送到后端 `POST /api/calculate`，然后显示后端返回的结果。如果后端停止，页面仍可以输入和点击按钮，但无法得到新的有效计算结果。
+The frontend does not calculate the final mathematical result. After clicking = or pressing Enter, it only sends the expression to the backend POST /api/calculate, and then displays the result returned by the backend. If the backend stops, the page can still accept input and button clicks, but it cannot obtain new valid calculation results.
 
-## 功能
+## Features
 
-- 按钮与键盘输入
-- 基础与复合表达式输入
-- 后端计算结果展示
-- 后端错误信息展示
-- SQLite 历史记录读取
-- 历史搜索
-- 单条删除、清空历史
-- 点击历史回填表达式
-- 复制结果
-- 深浅主题切换
-- 后端在线/离线状态提示
-- 响应式布局
+-Button and keyboard input
+-Basic and compound expression input
+-Backend calculation result display
+-Backend error message display
+-SQLite history reading
+-History search
+-Single deletion, clear history
+-Click history to fill back the expression
+-Copy result
+-Light/dark theme switching
+-Backend online/offline status indication
+-Responsive layout
 
-## 项目结构
+## Project Structure
 
 ```text
 832402216_calculator_frontend/
@@ -39,9 +39,9 @@
 └── codestyle.md
 ```
 
-## 本地运行
+## Local Run
 
-先启动后端：
+First start the backend:
 
 ```bash
 cd 832402216_calculator_backend
@@ -49,40 +49,39 @@ pip install -r requirements.txt
 python src/run.py
 ```
 
-再启动前端静态服务器：
+Then start the frontend static server:
 
 ```bash
 cd 832402216_calculator_frontend
 python -m http.server 5500 --directory src
 ```
 
-浏览器打开：`http://127.0.0.1:5500`
+Open in browser:`http://127.0.0.1:5500`
 
-本地模式下 `src/config.js` 会自动连接 `http://127.0.0.1:5000`。
+In local mode, src/config.js will automatically connect to http://127.0.0.1:5000.
 
-## GitHub Pages 部署
+## GitHub Pages Deployment
 
-1. 创建公开仓库 `832402216_calculator_frontend`。
-2. 将本目录全部内容推送到 `main` 分支。
-3. 先完成后端线上部署，获得 `https://你的用户名.pythonanywhere.com`。
-4. 修改 `src/config.js`：
+1.Create a public repository 832402216_calculator_frontend.
+2.Push all contents of this directory to the main branch.
+3.First complete the online backend deployment and obtain https://LiuJianhao.pythonanywhere.com.
+4.Modify src/config.js:
 
 ```javascript
-: 'https://YOUR_USERNAME.pythonanywhere.com';
+: 'https://LiuJianhao.pythonanywhere.com';
 ```
 
-替换为真实域名并再次提交、推送。
-5. 本仓库已经包含 `.github/workflows/deploy-pages.yml`，会把 `src/` 作为静态站点发布。
-6. GitHub 仓库 → **Settings → Pages**，Build and deployment 的 Source 选择 **GitHub Actions**。
-7. 回到 **Actions**，等待 `Deploy frontend to GitHub Pages` 变成绿色。
-8. 在 Pages 页面复制生成的公开网址。
+5.This repository already contains .github/workflows/deploy-pages.yml, which will publish src/ as a static site.
+6.GitHub repository → Settings → Pages, for Build and deployment Source select GitHub Actions.
+7.Go back to Actions and wait for Deploy frontend to GitHub Pages to turn green.
+8.Copy the generated public URL on the Pages page.
 
-## 与后端的接口关系
+## Interface Relationship with the Backend
 
-- 计算：`POST /api/calculate`
-- 历史：`GET /api/history`
-- 删除单条：`DELETE /api/history/{id}`
-- 清空：`DELETE /api/history`
-- 健康检查：`GET /health`
+-Calculation: POST /api/calculate
+-History: GET /api/history
+-Delete single entry: DELETE /api/history/{id}
+-Clear: DELETE /api/history
+-Health check: GET /health
 
-浏览器端只负责组织请求与渲染 JSON 响应。
+The browser side is only responsible for organizing requests and rendering JSON responses.

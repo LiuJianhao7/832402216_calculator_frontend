@@ -1,21 +1,21 @@
 # Frontend Code Style
 
-## 标准来源
+## Standard Sources
 
-本项目前端主要参考：
+This project's frontend mainly references:
 
 - Google JavaScript Style Guide: https://google.github.io/styleguide/jsguide.html
-- MDN Web Docs（HTML/CSS/JavaScript 与可访问性实践）: https://developer.mozilla.org/
+- MDN Web Docs (HTML/CSS/JavaScript and accessibility practices): https://developer.mozilla.org/
 
-## 约定
+## Conventions
 
-1. JavaScript 使用 `'use strict'`，变量优先使用 `const`，需要重新赋值时使用 `let`。
-2. JavaScript 变量和函数使用 `camelCase`，CSS class 使用语义明确的 `kebab-case`。
-3. 使用 2 个空格缩进；语句末尾使用分号。
-4. DOM 查询集中在文件顶部，功能拆成短函数。
-5. 网络请求统一通过 `apiRequest()`，错误统一转换为用户可理解的信息。
-6. 不在前端实现核心数学求值，不使用 `eval`。
-7. 用户输入写回 DOM 时使用 `textContent`，避免把历史内容当 HTML 注入。
-8. HTML 使用语义化标签、`label`、`aria-live`、可聚焦 `button`，兼顾键盘操作。
-9. CSS 通过自定义属性维护主题变量，媒体查询处理移动端。
-10. 注释解释设计意图，而不是逐行重复代码含义。
+1. JavaScript uses 'use strict'; prefer const for variables, and use let when reassignment is needed.
+2. JavaScript variables and functions use camelCase; CSS classes use semantically clear kebab-case.
+3. Use 2-space indentation; use semicolons at the end of statements.
+4. DOM queries are centralized at the top of the file; functionality is split into short functions.
+5. Network requests are uniformly made through apiRequest(); errors are uniformly converted into user-understandable information.
+6. Do not implement core mathematical evaluation in the frontend; do not use eval.
+7. When writing user input back to the DOM, use textContent to avoid injecting historical content as HTML.
+8. HTML uses semantic tags, label, aria-live, focusable button, and accommodates keyboard operation.
+9. CSS maintains theme variables through custom properties; media queries handle mobile.
+10. Comments explain design intent rather than repeating the meaning of the code line by line.
